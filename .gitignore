@@ -3,7 +3,6 @@
 profile
 
 # xcode noise
-build/*
 *.mode1
 *.mode1v3
 *.mode2v3
@@ -29,8 +28,6 @@ lib-cov
 
 node_modules/
 src/app/themes
-build/cache/
-build/releases/
 pids
 logs
 results

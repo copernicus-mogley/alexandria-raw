@@ -17,7 +17,8 @@ function createWindow () {
     'auto-hide-menu-bar': false,
     resizable: true,
     center: true,
-    frame: true
+    frame: true,
+    icon: __dirname + '/build/icon.ico'
   })
 
 	const {Menu} = require('electron')

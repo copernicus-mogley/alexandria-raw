@@ -30,6 +30,7 @@
   },
   "homepage": "https://github.com/copernicus-mogley/alexandria-raw#alexandria-raw",
   "devDependencies": {
-    "electron-prebuilt": "^1.2.0"
+    "electron-prebuilt": "^1.2.0",
+    "electron-builder": "^5.26.0"
   }
 }
