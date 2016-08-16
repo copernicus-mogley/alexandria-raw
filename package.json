@@ -1,27 +1,34 @@
 {
-  "name": "electron-quick-start",
-  "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "name": "Alexandria-RAW",
+  "version": "0.0.2",
+  "description": "A stripped-down Alexandria application",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
+  "build": {
+    "appId": "com.alexandria.raw",
+    "category": "public.app-category.entertainment"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/electron/electron-quick-start.git"
+    "url": "git+https://github.com/copernicus-mogley/alexandria-raw.git"
   },
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial"
+    "Alexandria",
+    "dloa",
+    "decentralized",
+    "media"
   ],
-  "author": "GitHub",
+  "author": {
+    "name" : "Ryan Taylor",
+    "email" : "ryan@9wizards.com"
+  },
   "license": "CC0-1.0",
   "bugs": {
-    "url": "https://github.com/electron/electron-quick-start/issues"
+    "url": "https://github.com/copernicus-mogley/alexandria-raw/issues"
   },
-  "homepage": "https://github.com/electron/electron-quick-start#readme",
+  "homepage": "https://github.com/copernicus-mogley/alexandria-raw#alexandria-raw",
   "devDependencies": {
     "electron-prebuilt": "^1.2.0"
   }
