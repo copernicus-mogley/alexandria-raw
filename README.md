@@ -8,6 +8,9 @@ git clone https://github.com/copernicus-mogley/alexandria-raw
 cd alexandria-raw
 # Install dependencies and run the app
 npm install && npm start
+# Build with electron-builder
+npm install electron-builder
+build
 ```
 
 Learn more about Alexandria (http://alexandria.io).
