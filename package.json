@@ -21,16 +21,15 @@
     "media"
   ],
   "author": {
-    "name" : "Ryan Taylor",
-    "email" : "ryan@9wizards.com"
+    "name": "Ryan Taylor",
+    "email": "ryan@9wizards.com"
   },
   "license": "CC0-1.0",
   "bugs": {
     "url": "https://github.com/copernicus-mogley/alexandria-raw/issues"
   },
   "homepage": "https://github.com/copernicus-mogley/alexandria-raw#alexandria-raw",
-  "devDependencies": {
-    "electron-prebuilt": "^1.2.0",
-    "electron-builder": "^5.26.0"
+  "dependencies": {
+    "electron": "^1.4.13"
   }
 }
