@@ -29,7 +29,7 @@
     "url": "https://github.com/copernicus-mogley/alexandria-raw/issues"
   },
   "homepage": "https://github.com/copernicus-mogley/alexandria-raw#alexandria-raw",
-  "dependencies": {
+  "devDependencies": {
     "electron": "^1.4.13"
   }
 }
