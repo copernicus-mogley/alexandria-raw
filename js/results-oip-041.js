@@ -5,6 +5,7 @@ function deDupeResults(filteredMedia) {
 	console.log(filteredMedia.length)
 	results.length = 0;
 	for (var i = filteredMedia.length - 1; i >= 0 ; i--) {
+		var txid = filteredMedia[i]['txid'];
 		if (filteredMedia[i]['media-data']){
 			var artifactData = filteredMedia[i]['media-data']['alexandria-media'];
 		} else {
@@ -14,7 +15,8 @@ function deDupeResults(filteredMedia) {
 		if (results.length === 0) {
 			results[results.length] = {
 				0: deDupeHash,
-				1: artifactData
+				1: artifactData,
+				2: txid
 			}
 			results.length ++;
 		} else {
@@ -22,7 +24,8 @@ function deDupeResults(filteredMedia) {
 			if (isRev === false) {
 				results[results.length] = {
 					0: deDupeHash,
-					1: artifactData
+					1: artifactData,
+					2: txid
 				}
 				results.length ++;
 			} else {
@@ -33,17 +36,6 @@ function deDupeResults(filteredMedia) {
 	populateSearchResults(results, 'media');
 }
 
-function in_array(what, where) {
-    var a=false;
-    for (var i=0; i<where.length; i++) {
-        if(what == where[i][0]) {
-            a=true;
-            break;
-        }
-    }
-    return a;
-}
-
 // POPULATE SEARCH RESULTS
 function populateSearchResults(results, module) {
 	console.info(results);
@@ -52,7 +44,7 @@ function populateSearchResults(results, module) {
 	};
 	if ( (module =='media') && (results) ) {
 		for (var i = 0; i < results.length; i++) {
-			appendResults(results[i][1]);
+			appendResults(results[i][1], results[i][2]);
 		}
 		$('#browse-media-wrap #'+module+'-results-wrap .row.'+module+'-entity:first-of-type').addClass('first');
 	} else if ( (module =='publisher') && (results) ) {
@@ -73,7 +65,7 @@ function populateSearchResults(results, module) {
 }
 
 // APPEND RESULTS TO LIST
-function appendResults(artifactData){
+function appendResults(artifactData, txid){
 	console.info(artifactData);
 	var artifactType = artifactData['type'];
 	var artifactPublisher = artifactData['publisher'];
@@ -97,15 +89,20 @@ function appendResults(artifactData){
 		artifactStr += ' | ' + artifactRuntime;
 	}
 	artifactStr += ' | ' + artifactTimestamp;
-	$('.artifactList:visible').append('<li>'+artifactStr+'</li>');
+	$('.artifactList:visible').append('<li><a onclick="console.log(&apos;'+txid+'&apos;)">'+artifactStr+'</a></li>');
 }
 
+// GET ARTIFACT CREATOR
 function getCreator(artifactType, artifactExtra) {
 	if ( (artifactType === 'music') || (artifactType === 'video') || (artifactType === 'book') ) {
 		return artifactExtra['artist'];
 	} else if ( (artifactType === 'thing') || (artifactType === 'html') ) {
 		return artifactExtra['creator'];
 	}
+}
+
+function afterSearch() {
+	$('.artifactList:visible').before('<p class="resultsCount">'+$('.artifactList:visible li').length+' Artifacts</p>');
 }
 
 // CALCULATE RUNTIME FROM SECONDS
@@ -134,8 +131,15 @@ function calcRuntime(seconds) {
 	return runtime;
 }
 
-function afterSearch() {
-	$('.artifactList:visible').before('<p class="resultsCount">'+$('.artifactList:visible li').length+' Artifacts</p>');
+function in_array(what, where) {
+    var a=false;
+    for (var i=0; i<where.length; i++) {
+        if(what == where[i][0]) {
+            a=true;
+            break;
+        }
+    }
+    return a;
 }
 
 String.prototype.hashCode = function(){
