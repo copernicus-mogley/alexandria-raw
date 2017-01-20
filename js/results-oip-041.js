@@ -79,12 +79,24 @@ function appendResults(artifactData){
 	var artifactPublisher = artifactData['publisher'];
 	var artifactInfo = artifactData['info'];
 	var artifactTitle = artifactInfo['title'];
+	var artifactYear = artifactInfo['year'];
 	var artifactExtra = (artifactInfo['extra-info'] ? artifactInfo['extra-info'] : artifactInfo['extraInfo']);
 	var artifactCreator = getCreator(artifactType, artifactExtra);
-	var artifactStr = artifactType+' | '+artifactTitle;
+	var artifactRuntime = (artifactExtra['runtime'] ? calcRuntime(artifactExtra['runtime']) : '');
+	var artifactTimestamp = artifactData['timestamp'];
+	var artifactTimestampLen = artifactTimestamp.toString().length;
+	if (artifactTimestampLen == 10) {
+		artifactTimestamp = parseInt(artifactTimestamp)*1000;
+	}
+	artifactTimestamp = new Date(artifactTimestamp);
+	var artifactStr = artifactType+' | '+artifactTitle+' | '+artifactYear;
 	if (artifactCreator) {
 		artifactStr += ' | ' + artifactCreator;
 	}
+	if (artifactRuntime != '') {
+		artifactStr += ' | ' + artifactRuntime;
+	}
+	artifactStr += ' | ' + artifactTimestamp;
 	$('.artifactList:visible').append('<li>'+artifactStr+'</li>');
 }
 
@@ -94,6 +106,36 @@ function getCreator(artifactType, artifactExtra) {
 	} else if ( (artifactType === 'thing') || (artifactType === 'html') ) {
 		return artifactExtra['creator'];
 	}
+}
+
+// CALCULATE RUNTIME FROM SECONDS
+function calcRuntime(seconds) {
+	var runSecs = seconds;
+	var runMins = 0;
+	var runHours = 0;
+	if (runSecs > 59) {
+		runMins = Math.floor(parseInt(seconds)/60);
+		runSecs = runSecs-(runMins*60);
+	}
+	if (runSecs < 10) {
+		runSecs = '0' + runSecs;
+	}
+	if (runMins > 59) {
+		runHours = Math.floor(parseInt(runMins)/60);
+		runMins = runMins-(runHours*60);
+	}
+	if (runMins < 10) {
+		runMins = '0' + runMins;
+	}
+	if (runHours < 10) {
+		runHours = '0' + runHours;
+	}
+	var runtime = runHours + ':' + runMins + ':' + runSecs;
+	return runtime;
+}
+
+function afterSearch() {
+	$('.artifactList:visible').before('<p class="resultsCount">'+$('.artifactList:visible li').length+' Artifacts</p>');
 }
 
 String.prototype.hashCode = function(){
@@ -108,8 +150,4 @@ String.prototype.hashCode = function(){
         hash = hash & hash; // Convert to 32bit integer
     }
     return hash;
-}
-
-function afterSearch() {
-	$('.artifactList:visible').before('<p class="resultsCount">'+$('.artifactList:visible li').length+' Artifacts</p>');
 }
