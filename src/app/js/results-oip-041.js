@@ -2,7 +2,6 @@
 function deDupeResults(filteredMedia) {
 	var revs = 0;
 	var results = {};
-	console.log(filteredMedia.length)
 	results.length = 0;
 	for (var i = filteredMedia.length - 1; i >= 0 ; i--) {
 		var txid = filteredMedia[i]['txid'];
@@ -35,7 +34,6 @@ function deDupeResults(filteredMedia) {
 // POPULATE SEARCH RESULTS
 function populateSearchResults(results, module) {
 	$('#searchResults').show();
-	console.info(results);
 	if (module === 'publishers') {
 		module = 'publisher';
 	};
@@ -63,7 +61,6 @@ function populateSearchResults(results, module) {
 
 // APPEND RESULTS TO LIST
 function appendResults(artifactData, txid){
-	console.info(artifactData);
 	var artifactType = artifactData['type'];
 	var artifactPublisher = artifactData['publisher'];
 	var artifactInfo = artifactData['info'];

@@ -23,6 +23,6 @@ function loadArtifact(artifactData) {
 		artifactTimestamp = parseInt(artifactTimestamp)*1000;
 	}
 	artifactTimestamp = new Date(artifactTimestamp);
-	var artifactStr = '<h1>'+artifactTitle+'</h1>';
+	var artifactStr = '<h1>'+artifactTitle+'</h1><p>'+artifactPublisher+'</p><div>'+JSON.stringify(artifactData, null, "    ")+'</div>';
 	$('#artifactView').append(artifactStr);
 }
