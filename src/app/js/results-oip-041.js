@@ -6,11 +6,7 @@ function deDupeResults(filteredMedia) {
 	results.length = 0;
 	for (var i = filteredMedia.length - 1; i >= 0 ; i--) {
 		var txid = filteredMedia[i]['txid'];
-		if (filteredMedia[i]['media-data']){
-			var artifactData = filteredMedia[i]['media-data']['alexandria-media'];
-		} else {
-			var artifactData = filteredMedia[i]['oip-041']['artifact'];
-		}
+		var artifactData = parseArtifactData(filteredMedia[i]);
 		var deDupeHash = new String(artifactData['info']['title']+'_'+artifactData['publisher']).hashCode();
 		if (results.length === 0) {
 			results[results.length] = {
@@ -38,6 +34,7 @@ function deDupeResults(filteredMedia) {
 
 // POPULATE SEARCH RESULTS
 function populateSearchResults(results, module) {
+	$('#searchResults').show();
 	console.info(results);
 	if (module === 'publishers') {
 		module = 'publisher';
@@ -89,7 +86,7 @@ function appendResults(artifactData, txid){
 		artifactStr += ' | ' + artifactRuntime;
 	}
 	artifactStr += ' | ' + artifactTimestamp;
-	$('.artifactList:visible').append('<li><a onclick="console.log(&apos;'+txid+'&apos;)">'+artifactStr+'</a></li>');
+	$('.artifactList:visible').append('<li><a onclick="getArtifact(&apos;'+txid+'&apos;)">'+artifactStr+'</a></li>');
 }
 
 // GET ARTIFACT CREATOR

@@ -2,7 +2,7 @@
   "name": "Alexandria-RAW",
   "version": "0.0.2",
   "description": "A stripped-down Alexandria application",
-  "main": "main.js",
+  "main": "src/app/app.js",
   "scripts": {
     "start": "electron ."
   },

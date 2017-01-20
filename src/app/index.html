@@ -18,8 +18,13 @@
 
     <p><a onclick="getAllArtifacts()">List Artifacts</a></p>
 
-    <ul class="artifactList">
-    </ul>
+    <div id="searchResults" class="viewWrapper">
+      <ul class="artifactList">
+      </ul>
+    </div>
+
+    <div id="artifactView" class="viewWrapper">
+    </div>
 
   <p>We are using node <script>document.write(process.versions.node)</script>,
     Chromium <script>document.write(process.versions.chrome)</script>,
@@ -32,8 +37,10 @@
     var $ = require('jquery');
     window.librarianHost = 'https://api.alexandria.io';
   </script>
-  <script src="js/artifactSearch.js"></script>
+  <script src="js/main.js"></script>
   <script src="js/search.js"></script>
+  <script src="js/artifactSearch.js"></script>
   <script src="js/results-oip-041.js"></script>
+  <script src="js/artifact-oip-041.js"></script>
 
 </html>
