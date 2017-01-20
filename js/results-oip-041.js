@@ -69,7 +69,7 @@ function populateSearchResults(results, module) {
 		$(this).before('<h2 id="'+module+'-results-title">'+resultsTitle+'</h2>');
 */
 	});
-//	afterSearch();
+	afterSearch();
 }
 
 // APPEND RESULTS TO LIST
@@ -92,4 +92,8 @@ String.prototype.hashCode = function(){
         hash = hash & hash; // Convert to 32bit integer
     }
     return hash;
+}
+
+function afterSearch() {
+	$('.artifactList:visible').before('<p class="resultsCount">'+$('.artifactList:visible li').length+' Artifacts</p>');
 }
