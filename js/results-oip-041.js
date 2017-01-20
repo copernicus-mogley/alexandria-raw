@@ -74,10 +74,26 @@ function populateSearchResults(results, module) {
 
 // APPEND RESULTS TO LIST
 function appendResults(artifactData){
+	console.info(artifactData);
+	var artifactType = artifactData['type'];
 	var artifactPublisher = artifactData['publisher'];
 	var artifactInfo = artifactData['info'];
 	var artifactTitle = artifactInfo['title'];
-	$('.artifactList:visible').append('<li>'+artifactTitle+' | '+artifactPublisher+'</li>');
+	var artifactExtra = (artifactInfo['extra-info'] ? artifactInfo['extra-info'] : artifactInfo['extraInfo']);
+	var artifactCreator = getCreator(artifactType, artifactExtra);
+	var artifactStr = artifactType+' | '+artifactTitle;
+	if (artifactCreator) {
+		artifactStr += ' | ' + artifactCreator;
+	}
+	$('.artifactList:visible').append('<li>'+artifactStr+'</li>');
+}
+
+function getCreator(artifactType, artifactExtra) {
+	if ( (artifactType === 'music') || (artifactType === 'video') || (artifactType === 'book') ) {
+		return artifactExtra['artist'];
+	} else if ( (artifactType === 'thing') || (artifactType === 'html') ) {
+		return artifactExtra['creator'];
+	}
 }
 
 String.prototype.hashCode = function(){
